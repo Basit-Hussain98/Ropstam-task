@@ -103,6 +103,15 @@ a {
   text-decoration: none;
 }
 
+.text-primary {
+  color: #007bff;
+}
+
+  .text-primary:hover {
+    color: #613BF7;
+    text-decoration: underline;
+  }
+
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;

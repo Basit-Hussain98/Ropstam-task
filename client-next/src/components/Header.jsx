@@ -1,6 +1,8 @@
 import React from "react";
 import Link from "next/link";
 import Router from "next/router";
+import Dropdown from "react-bootstrap/Dropdown";
+
 function Header() {
   const [user, setUser] = React.useState();
 
@@ -16,34 +18,71 @@ function Header() {
   };
 
   return (
-    <div className="   h-20 shadow-2xl bg-white text-black flex items-center justify-between px-20  w-full ">
-      <Link href="/">
-        <h1 className="text-2xl">ROPSTAM</h1>
+    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+      <Link className="navbar-brand" href="/">
+        ROPSTAM
       </Link>
-      <div>
-        <span className="mx-5 font-bold text-lg">{user?.name}</span>
-        <Link href="login">
-          <button className="bg-[#613BF7] text-white px-8 rounded py-1 mx-2">
-            Login
-          </button>
-        </Link>
-        <Link href="signup">
-          <button className="bg-[#613BF7] text-white px-8 rounded py-1 mx-2">
-            Signup
-          </button>
-        </Link>
-        {user && (
-          <Link href="signup">
-            <button
-              onClick={logoutHandler}
-              className="bg-[#613BF7] text-white px-8 rounded py-1 mx-2"
-            >
-              Log out
-            </button>
-          </Link>
-        )}
+      <button
+        className="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span className="navbar-toggler-icon"></span>
+      </button>
+
+      <div className="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul className="navbar-nav mr-auto">
+          {user && (
+            <>
+              <li className="nav-item">
+                <Link className="nav-link" href="/">
+                  Dashboard
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" href="/categories">
+                  Categories
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" href="/cars">
+                  Cars
+                </Link>
+              </li>
+            </>
+          )}
+        </ul>
+        <form className="form-inline my-2 my-lg-0">
+          {!user && (
+            <>
+              <Link href="login">
+                <button className="btn btn-muted">Login</button>
+              </Link>
+              <Link href="signup">
+                <button className="btn btn-muted">Signup</button>
+              </Link>
+            </>
+          )}
+          {user && (
+            <Dropdown>
+              <Dropdown.Toggle variant="scandary" id="dropdown-basic">
+                {user?.name}
+              </Dropdown.Toggle>
+
+              <Dropdown.Menu>
+                <Dropdown.Item className="btn" onClick={logoutHandler}>
+                  Log out
+                </Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
+          )}
+        </form>
       </div>
-    </div>
+    </nav>
   );
 }
 

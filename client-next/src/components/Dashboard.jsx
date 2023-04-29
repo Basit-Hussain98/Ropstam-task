@@ -25,10 +25,10 @@ function Dashboard() {
   }, []);
   console.log(totalCars);
   return (
-    <div className="mx-20 pt-20">
-      <h1 className="font-bold text-lg text-black">
-        Total Registered Cars: {totalCars}{" "}
-      </h1>
+    <div className="card">
+      <div className="card-body">
+        Total Registered Cars <span class="badge badge-primary">{totalCars}</span>
+      </div>
     </div>
   );
 }
